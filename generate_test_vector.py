@@ -49,8 +49,6 @@ class Test_Generator:
         return sum
 
 
-    def convert_normalized_numb_to_vector(self, vector):
-        pass 
     
     def convert_vector_to_denormalized_num(self, vector):
 
@@ -63,14 +61,60 @@ class Test_Generator:
         
         return sum
 
-    def convert_denormalized_numb_to_vector(self, vector):
-        pass 
 
 
+    def interger_to_binary(self, num):
+        if num == 0:
+            return [0]
+        arr = []
+        while num >0:
+            arr.append(num%2)
+            num = num//2
+        return arr[::-1]
+
+
+    def decimal_to_binary(self, num):
+
+        arr = []
+        i = -1 
+        while num >0:
+            arr.append(int(num/2**(i)))
+            num = num%(2**(i))
+            i-=1
+        return arr
+
+    def convert_num_to_vector(self, num):
+        
+        Sign = [1] if num < 0 else  [0]
+
+
+        if num > 1.1754942E-38:
+            integer, decimal =  self.interger_to_binary(int(num//1)), self.decimal_to_binary(num%1)
+            
+            vect = integer+decimal
+            decimal_position = len(integer)-1
+            fist_1_index = vect.index(1)
+
+            shift = decimal_position - fist_1_index 
+            Exp = shift 
+            Exp +=127
+            Exp = self.interger_to_binary(Exp)
+            Exp = [ 0 for i in range(8-len(Exp)) ] + Exp
+            Fract = vect[fist_1_index+1:fist_1_index+1+23] if len(decimal) >= 23  else  vect[fist_1_index+1:] + [0 for i in range(23-len(vect[fist_1_index+1:]))]
+        else:
+            Exp = [0 for i in range(8)]
+            decimal = num / (2**(-126))
+            decimal = self.decimal_to_binary(decimal)
+            print(len(decimal))
+            Fract = decimal[0:23] if len(decimal)>23 else decimal + [0 for i in range(23-len(decimal))]
+            print(len(Fract))
+
+        return "".join(list(map(lambda x : str(x), Sign+Exp+Fract)))
+
+            
 
 if __name__ == "__main__":
     
     t = Test_Generator()
-    r = [0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    print(t.convert_vector_to_denormalized_num(r))
+    print(t.convert_num_to_vector(1.1005E-37))
 
