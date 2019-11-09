@@ -7,14 +7,15 @@ class Generator:
         pass
 
     
-    def convert_vect_to_number(self):
+    def convert_vector_to_number(self):
         pass 
 
-    def convert_number_to_vect(self):
+    def convert_number_to_vector(self):
         pass 
 
 
 
 
 if __name__ == "__main__":
+    pass
 
