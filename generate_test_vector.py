@@ -148,8 +148,8 @@ class Test_Generator:
                 # denormalized + # denormalized
                 A = self.random_denormalized_vector()
                 B = self.random_denormalized_vector()
-                A_num = self.convert_vector_to_normalized_num(A)
-                B_num = self.convert_vector_to_normalized_num(B)
+                A_num = self.convert_vector_to_denormalized_num(A)
+                B_num = self.convert_vector_to_denormalized_num(B)
                 C_num = A_num + B_num
                 C = self.convert_num_to_vector(C_num)
                 line = ""
@@ -163,7 +163,7 @@ class Test_Generator:
                 A = self.random_normalized_vector()
                 B = self.random_denormalized_vector()
                 A_num = self.convert_vector_to_normalized_num(A)
-                B_num = self.convert_vector_to_normalized_num(B)
+                B_num = self.convert_vector_to_denormalized_num(B)
                 C_num = A_num + B_num
                 C = self.convert_num_to_vector(C_num)
                 line = ""
@@ -176,7 +176,7 @@ class Test_Generator:
                 # denormalized + # normalized
                 A = self.random_denormalized_vector()
                 B = self.random_normalized_vector()
-                A_num = self.convert_vector_to_normalized_num(A)
+                A_num = self.convert_vector_to_denormalized_num(A)
                 B_num = self.convert_vector_to_normalized_num(B)
                 C_num = A_num + B_num
                 C = self.convert_num_to_vector(C_num)
@@ -264,7 +264,7 @@ class Test_Generator:
                 f.write(line)
 
             for i in range(self.num_per_case):
-                # normalized + #Nan
+                # denormalized + #Nan
                 A = self.random_denormalized_vector()
                 A_num = self.convert_vector_to_denormalized_num(A)
                 B = "Nan"+" "+"01111111100000000000000000000001"
