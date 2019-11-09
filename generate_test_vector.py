@@ -3,8 +3,8 @@ import os
 
 
 class Generator:
-    def __init__(self):
-        pass
+    def __init__(self, num_per_case = 100): # number of test for each case
+        self.num_per_case = num_per_case
 
     
     def convert_vector_to_number(self):
