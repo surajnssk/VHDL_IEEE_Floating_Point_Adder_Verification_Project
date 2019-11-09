@@ -2,7 +2,7 @@ import random
 import os
 
 
-class Generator:
+class Test_Generator:
     def __init__(self, num_per_case = 100): # number of test for each case
         self.num_per_case = num_per_case
 
