@@ -351,7 +351,7 @@ class Test_Generator:
                 line = ""
                 line = (".............-0" if A[0] else ".............+0") +" "+"".join(list(map(lambda x:str(x), A)))+(".............-0" if B[0] else ".............+0")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line =  (".............-0 10000000000000000000000000000000" if  A[0] and B[0] else ".............+0 00000000000000000000000000000000")+"\n"
+                line =  (".............-0 10000000000000000000000000000000" if  (A[0] and B[0]) else ".............+0 00000000000000000000000000000000")+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
