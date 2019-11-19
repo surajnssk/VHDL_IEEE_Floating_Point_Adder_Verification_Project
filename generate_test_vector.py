@@ -126,6 +126,14 @@ class Test_Generator:
         return [ random.randint(0,1)] + [0 for i in range(31)]
 
 
+    def format_num(self,num):
+        if num >=0:
+            return "....+{:10.4e}".format(num)
+        else:
+            return  "....{:10.4e}".format(num)
+
+
+
     def generate_test_vector_file(self):
         
         with open("test_vector.txt", "w") as f:
@@ -139,9 +147,9 @@ class Test_Generator:
                 C_num = A_num + B_num
                 C = self.convert_num_to_vector(C_num)
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = str(C_num) + " "+ C+"\n"
+                line =self.format_num(C_num) + " "+ C+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
@@ -153,9 +161,9 @@ class Test_Generator:
                 C_num = A_num + B_num
                 C = self.convert_num_to_vector(C_num)
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = str(C_num) + " "+ C+"\n"
+                line = self.format_num(C_num) + " "+ C+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
@@ -167,9 +175,9 @@ class Test_Generator:
                 C_num = A_num + B_num
                 C = self.convert_num_to_vector(C_num)
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = str(C_num) + " "+ C+"\n"
+                line = self.format_num(C_num) + " "+ C+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
@@ -181,9 +189,9 @@ class Test_Generator:
                 C_num = A_num + B_num
                 C = self.convert_num_to_vector(C_num)
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = str(C_num) + " "+ C+"\n"
+                line = self.format_num(C_num) + " "+ C+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
@@ -192,9 +200,9 @@ class Test_Generator:
                 B = self.random_normalized_vector()
                 B_num = self.convert_vector_to_normalized_num(B)
                 line = ""
-                line = ("-INFI" if A[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = ("..........-INFI" if A[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = ("-INFI" if A[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+"\n"
+                line = ("..........-INFI" if A[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+"\n"
                 f.write(line)
 
             for i in range(self.num_per_case):
@@ -203,9 +211,9 @@ class Test_Generator:
                 A_num = self.convert_vector_to_normalized_num(A)
                 B = self.random_infinity()
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+(("-INFI" if B[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), B))))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+(("..........-INFI" if B[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), B))))+"\n"
                 f.write(line)
-                line = ("-INFI" if B[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = ("..........-INFI" if B[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
             
 
@@ -215,9 +223,9 @@ class Test_Generator:
                 B = self.random_denormalized_vector()
                 B_num = self.convert_vector_to_denormalized_num(B)
                 line = ""
-                line = ("-INFI" if A[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = ("..........-INFI" if A[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = ("-INFI" if A[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+"\n"
+                line = ("..........-INFI" if A[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+"\n"
                 f.write(line)
 
             for i in range(self.num_per_case):
@@ -226,52 +234,52 @@ class Test_Generator:
                 A_num = self.convert_vector_to_denormalized_num(A)
                 B = self.random_infinity()
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+(("-INFI" if B[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), B))))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+(("..........-INFI" if B[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), B))))+"\n"
                 f.write(line)
-                line = ("-INFI" if B[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = ("..........-INFI" if B[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
-                # Nan + # normalized
+                #Nan + # normalized
                 A = "01111111100000000000000000000001"
                 B = self.random_normalized_vector()
                 B_num = self.convert_vector_to_normalized_num(B)
                 line = ""
-                line = "Nan"+" "+"01111111100000000000000000000001"+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = "Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
 
             for i in range(self.num_per_case):
                 # normalized + #Nan
                 A = self.random_normalized_vector()
                 A_num = self.convert_vector_to_normalized_num(A)
-                B = "Nan"+" "+"01111111100000000000000000000001"
+                B = "............Nan"+" "+"01111111100000000000000000000001"
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+"Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+"............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
-                line = "Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
             for i in range(self.num_per_case):
-                # Nan + # denormalized
+                #Nan + # denormalized
                 A = "01111111100000000000000000000001"
                 B = self.random_denormalized_vector()
                 B_num = self.convert_vector_to_denormalized_num(B)
                 line = ""
-                line = "Nan"+" "+"01111111100000000000000000000001"+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = "Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
 
             for i in range(self.num_per_case):
                 # denormalized + #Nan
                 A = self.random_denormalized_vector()
                 A_num = self.convert_vector_to_denormalized_num(A)
-                B = "Nan"+" "+"01111111100000000000000000000001"
+                B = "............Nan"+" "+"01111111100000000000000000000001"
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+"Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+"............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
-                line = "Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
@@ -280,9 +288,9 @@ class Test_Generator:
                 B = self.random_normalized_vector()
                 B_num = self.convert_vector_to_normalized_num(B)
                 line = ""
-                line = ("-0" if A[0] else "+0") +" "+"".join(list(map(lambda x:str(x), A)))+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = (".............-0" if A[0] else ".............+0") +" "+"".join(list(map(lambda x:str(x), A)))+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
@@ -291,9 +299,9 @@ class Test_Generator:
                 A_num = self.convert_vector_to_normalized_num(A)
                 B = self.random_zero()
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+("-0" if B[0] else "+0") +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+(".............-0" if B[0] else ".............+0") +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+"\n"
                 f.write(line)
             for i in range(self.num_per_case):
                 # zero + # denormalized
@@ -301,9 +309,9 @@ class Test_Generator:
                 B = self.random_denormalized_vector()
                 B_num = self.convert_vector_to_denormalized_num(B)
                 line = ""
-                line = ("-0" if A[0] else "+0") +" "+"".join(list(map(lambda x:str(x), A)))+" "+str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = (".............-0" if A[0] else ".............+0") +" "+"".join(list(map(lambda x:str(x), A)))+self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = str(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = self.format_num(B_num) +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
@@ -312,9 +320,9 @@ class Test_Generator:
                 A_num = self.convert_vector_to_denormalized_num(A)
                 B = self.random_zero()
                 line = ""
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+" "+("-0" if B[0] else "+0") +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+(".............-0" if B[0] else ".............+0") +" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = str(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+"\n"
+                line = self.format_num(A_num) +" "+"".join(list(map(lambda x:str(x), A)))+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
@@ -322,18 +330,18 @@ class Test_Generator:
                 A = self.random_zero()
                 B = self.random_infinity()
                 line = ""
-                line = ("-0" if A[0] else "+0") +" "+"".join(list(map(lambda x:str(x), A)))+" "+("-INFI" if B[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = (".............-0" if A[0] else ".............+0") +" "+"".join(list(map(lambda x:str(x), A)))+("..........-INFI" if B[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = ("-INFI" if B[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = ("..........-INFI" if B[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
             for i in range(self.num_per_case):
                 # infinity  + # zero
                 A = self.random_infinity()
                 B = self.random_zero()
                 line = ""
-                line = ("-INFI" if A[0] else "+INFI") +" "+"".join(list(map(lambda x:str(x), A)))+" "+("-0" if B[0] else "+0")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = ("..........-INFI" if A[0] else "..........+INFI") +" "+"".join(list(map(lambda x:str(x), A)))+(".............-0" if B[0] else ".............+0")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = ("-INFI" if A[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+"\n"
+                line = ("..........-INFI" if A[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
@@ -341,47 +349,47 @@ class Test_Generator:
                 A = self.random_zero()
                 B = self.random_zero()
                 line = ""
-                line = ("-0" if A[0] else "+0") +" "+"".join(list(map(lambda x:str(x), A)))+" "+("-0" if B[0] else "+0")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = (".............-0" if A[0] else ".............+0") +" "+"".join(list(map(lambda x:str(x), A)))+(".............-0" if B[0] else ".............+0")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = ("-0" if A[0] else "+0")+" "+"".join(list(map(lambda x:str(x), A)))+"\n"
+                line = (".............-0" if A[0] else ".............+0")+" "+"".join(list(map(lambda x:str(x), A)))+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
-                # Nan  + # zero
-                A = "Nan"+" "+"01111111100000000000000000000001"
+                #Nan  + # zero
+                A = "............Nan"+" "+"01111111100000000000000000000001"
                 B = self.random_zero()
                 line = ""
-                line = "Nan"+" "+"01111111100000000000000000000001"+" "+("-0" if B[0] else "+0")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+(".............-0" if B[0] else ".............+0")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = "Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
             for i in range(self.num_per_case):
-                # Zero  + # Nan
+                # Zero  + #Nan
                 A = self.random_zero()
-                B = "Nan"+" "+"01111111100000000000000000000001"
+                B = "............Nan"+" "+"01111111100000000000000000000001"
                 line = ""
-                line = ("-0" if A[0] else "+0")+" "+"".join(list(map(lambda x:str(x), A)))+" "+"Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = (".............-0" if A[0] else ".............+0")+" "+"".join(list(map(lambda x:str(x), A)))+"............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
-                line = "Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
             
             for i in range(self.num_per_case):
-                # Nan  + # infinity
-                A = "Nan"+" "+"01111111100000000000000000000001"
+                #Nan  + # infinity
+                A = "............Nan"+" "+"01111111100000000000000000000001"
                 B = self.random_infinity()
                 line = ""
-                line = "Nan"+" "+"01111111100000000000000000000001"+" "+("-INFI" if B[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+("..........-INFI" if B[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), B)))+"\n"
                 f.write(line)
-                line = "Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
             for i in range(self.num_per_case):
-                # infinity  + # Nan
+                # infinity  + #Nan
                 A = self.random_infinity()
-                B = "Nan"+" "+"01111111100000000000000000000001"
+                B = "............Nan"+" "+"01111111100000000000000000000001"
                 line = ""
-                line = ("-INFI" if A[0] else "+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+" "+"Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = ("..........-INFI" if A[0] else "..........+INFI")+" "+"".join(list(map(lambda x:str(x), A)))+"............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
-                line = "Nan"+" "+"01111111100000000000000000000001"+"\n"
+                line = "............Nan"+" "+"01111111100000000000000000000001"+"\n"
                 f.write(line)
 
 
